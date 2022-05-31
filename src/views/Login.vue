@@ -1,11 +1,14 @@
-<template>
-  <HelloWorldVue></HelloWorldVue>
-</template>
-
-<script setup>
-import HelloWorldVue from ':/components/HelloWorld.vue';
+<script>
+import { useRequest } from ":/apphooks/request";
+export default {
+  setup() {
+    const http = useRequest();
+    console.log(http.post('/'));
+  },
+};
 </script>
 
-<style>
+<template></template>
 
+<style lang="less" scoped>
 </style>
