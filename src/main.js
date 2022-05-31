@@ -1,9 +1,9 @@
 import { createApp } from "vue";
 
 import App from "./App.vue";
-import {appHooks} from ':/apphooks'
+import { appHooks } from ":/apphooks";
 
-const {useStore,useUIKt,useRouter} = appHooks;
+const { useStore, useUIKt, useRouter } = appHooks;
 
 async function runApp() {
   const app = createApp(App);
@@ -12,6 +12,5 @@ async function runApp() {
   await useRouter(app);
   app.mount("#app");
 }
-
 
 await runApp();
