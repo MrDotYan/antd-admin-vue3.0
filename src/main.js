@@ -1,6 +1,17 @@
-import { createApp } from 'vue';
-import Antd from 'ant-design-vue';
-import App from './App.vue';
-import 'ant-design-vue/dist/antd.css';
+import { createApp } from "vue";
 
-createApp(App).use(Antd).mount('#app')
+import App from "./App.vue";
+import {appHooks} from ':/apphooks'
+
+const {useStore,useUIKt,useRouter} = appHooks;
+
+async function runApp() {
+  const app = createApp(App);
+  useStore(app);
+  useUIKt(app);
+  await useRouter(app);
+  app.mount("#app");
+}
+
+
+await runApp();

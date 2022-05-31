@@ -1,8 +1,10 @@
 import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
+import path  from 'path';
 
-import VueJsx from '@vitejs/plugin-vue-jsx';
-import viteCompression from 'vite-plugin-compression';
+import VueJsx from "@vitejs/plugin-vue-jsx";
+import viteCompression from "vite-plugin-compression";
+
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, __dirname);
@@ -12,14 +14,14 @@ export default defineConfig(({ mode }) => {
       port: Number(env.VITE_APP_PORT),
       open: true,
     },
-    plugins: [vue() ,VueJsx(), viteCompression()],
+    plugins: [vue(), VueJsx(), viteCompression()],
     build: {
       terser: {
         compress: {
           drop_console: true,
-          drop_debugger:  true
-        }
-      }
+          drop_debugger: true,
+        },
+      },
     },
     css: {
       postcss: {},
@@ -30,7 +32,14 @@ export default defineConfig(({ mode }) => {
       },
     },
     resolve: {
-      extensions: ['.vue', '.tsx', '.ts','.js','.jsx','.mjs']
-    }
+      alias: [
+        // :/xxxx => src/xxxx
+        {
+          find:/\:\//,
+          replacement: path.join(__dirname,'src/'),
+        },
+      ],
+      extensions: [".vue", ".tsx", ".ts", ".js", ".jsx", ".mjs"],
+    },
   };
 });
